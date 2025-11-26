@@ -102,6 +102,7 @@ async def admin_workers_callback(call: CallbackQuery, state: FSMContext):
 
     elif current_state in (
         AddAdminStates.waiting_for_admin_check.state,
+        AddAdminStates.waiting_for_admin_phone.state,
         DeleteAdminStates.waiting_for_admin.state,
         DeleteAdminStates.waiting_for_admin_phone.state
     ):
@@ -500,7 +501,8 @@ async def add_admin_check(call:CallbackQuery, state:FSMContext, bot:Bot):
     db.add_admin(phone)
     await call.answer("✅ Yangi admin qo'shildi!")
     user = db.get_user_by_phone(phone)
-    await bot.send_message(user[1], f"<b>{user[2]}</b> - sizga admin huquqi berildi!\n\n<b>Istalgan paytda:</b>\n\n/admin_panel - <i>ni yuborish orqali admin panelga o'tishingiz mumkin.</i>\n\n/start - <i>buyrug'i bilan esa ishchi paneliga qaytishingiz mumkin.</i>")
+    if user[1]:
+        await bot.send_message(user[1], f"<b>{user[2]}</b> - sizga admin huquqi berildi!\n\n<b>Istalgan paytda:</b>\n\n/admin_panel - <i>ni yuborish orqali admin panelga o'tishingiz mumkin.</i>\n\n/start - <i>buyrug'i bilan esa ishchi paneliga qaytishingiz mumkin.</i>")
     await call.message.answer("<b>🏠 ASOSIY MENYU</b>\n\nQuyidagilardan birini tanlang:", reply_markup=admin_main_menu())
 
 
