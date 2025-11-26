@@ -1,0 +1,14 @@
+# requirements.txt
+# Telegram bot uchun kerakli kutubxonalar
+
+# Asosiy bot kutubxonasi
+aiogram==3.4.1
+
+# Scheduler - avtomatik xabarlar uchun
+APScheduler==3.10.4
+
+# Database
+# SQLite Python bilan birga keladi, qo'shimcha o'rnatish shart emas
+
+# Vaqt zonasi
+pytz==2024.1
